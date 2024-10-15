@@ -140,15 +140,16 @@
 
                 // Collect the data from the form
                 var formData = new FormData(this);
+                console.log('Form data:', formData);
 
                 // Send data to Google Apps Script endpoint
-                fetch('https://script.google.com/macros/s/AKfycbxoyAUxjbib7yNV8E2R-ROW4LnLcZqn0CafmZNj2v8bSkeyNs2EzncIg83eANjRCpjo/exec', {
+                fetch('https://script.google.com/macros/s/AKfycbxBxZV7NTSn-MRycgPVDqKtY-Vaa-JmfMRR46PLy3QG3lhzlqKdUwdFa6fbgaclIB4O/exec', {
                     method: 'POST',
                     body: formData
                 })
                 .then(response => response.json())
-                .then(data => alert('Data sent successfully!'))
-                .catch(error => alert('Error:', error));
+                .then(data => console.log('Data sent successfully!'))
+                .catch(error => console.log('Error:', error));
             });
         });
     </script>
