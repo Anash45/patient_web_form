@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Patient Details</title>
     <meta charset="utf-8" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -28,6 +29,7 @@
             border-radius: 20px;
         }
         h1 {
+            margin-top: 20px;
             text-align: center;
             margin-bottom: 20px;
             font-size: 40px;
@@ -136,6 +138,7 @@
         <fieldset>
             <label class="check-label"><input name="checkbox" type="checkbox" required /> I hereby certify that the information provided above is true, correct, and complete.</label>
         </fieldset>
+        <div id="response"></div>
         <div class="center">
             <button class="waves-effect waves-light btn-large" type="submit"><i class="material-icons right">send</i>Submit</button>
         </div>
@@ -195,9 +198,45 @@
                     body: formData
                 })
                 .then(response => response.json())
-                .then(data => console.log('Data sent successfully!'))
-                .catch(error => console.log('Error:', error));
+                .then(data => {
+                    // Show success alert and reset form
+                    if (data.result === 'success') {
+                        $('#response').html(`
+                            <div class="card green lighten-4">
+                                <div class="card-content green-text">
+                                    <span class="card-title"><i class="material-icons left">check_circle</i>Success!</span>
+                                    <p>Your details has been submitted successfully.</p>
+                                </div>
+                            </div>
+                        `);
+                        $('#registration-form')[0].reset(); // Reset the form
+                        $('select').formSelect(); // Re-initialize Materialize select
+                    } else {
+                        // Show danger alert if data.result is not 'success'
+                        $('#response').html(`
+                            <div class="card red lighten-4">
+                                <div class="card-content red-text">
+                                    <span class="card-title"><i class="material-icons left">error</i>Error!</span>
+                                    <p>There was an issue with your submission. Please try again.</p>
+                                </div>
+                            </div>
+                        `);
+                    }
+                })
+                .catch(error => {
+                    // Show danger alert for network errors or other fetch errors
+                    $('#response').html(`
+                        <div class="card red lighten-4">
+                            <div class="card-content red-text">
+                                <span class="card-title"><i class="material-icons left">error</i>Error!</span>
+                                <p>There was an issue with your submission. Please try again.</p>
+                            </div>
+                        </div>
+                    `);
+                    console.log('Error:', error);
+                });
             }
+            
         
             function toBase64(file) {
                 return new Promise((resolve, reject) => {
