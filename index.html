@@ -33,18 +33,30 @@
             font-size: 40px;
             font-weight: 600;
         }
+
+        input[type="checkbox"] {
+            opacity: 1 !important;
+            pointer-events: unset !important;
+            position: static !important;
+        }
+
+        .check-label{
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
     </style>
 </head>
 
 <body>
-    <form id="registration-form">
+    <form id="registration-form" enctype="multipart/form-data">
         <h1>Patient Registration Form</h1>
         <fieldset>
             <legend>Personal Details</legend>
             <div class="row">
                 <div class="col s12">
                     <label for="image">Upload Image</label>
-                    <input id="image" name="image" type="file" class="validate">
+                    <input id="image" name="image" type="file" class="validate" accept="image/png, image/jpg, image/jpeg">
                 </div>
                 <div class="input-field col s6">
                     <input id="first_name" name="first_name" type="text" class="validate" required>
@@ -122,7 +134,7 @@
             </div>
         </fieldset>
         <fieldset>
-            <label><input name="checkbox" type="checkbox" required /> I hereby certify that the information provided above is true, correct, and complete.</label>
+            <label class="check-label"><input name="checkbox" type="checkbox" required /> I hereby certify that the information provided above is true, correct, and complete.</label>
         </fieldset>
         <div class="center">
             <button class="waves-effect waves-light btn-large" type="submit"><i class="material-icons right">send</i>Submit</button>
@@ -133,25 +145,70 @@
     <script>
         $(document).ready(function () {
             $('select').formSelect();
-            $('.datepicker').datepicker();
-
+            $('.datepicker').datepicker({
+                onSelect: function(selectedDate) {
+                    $('#age');
+                    // Calculate the age based on selected date
+                    var birthDate = new Date(selectedDate);
+                    var today = new Date();
+                    var age = today.getFullYear() - birthDate.getFullYear();
+                    var month = today.getMonth() - birthDate.getMonth();
+        
+                    // Adjust age if the birthday hasn't occurred yet this year
+                    if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+                        age--;
+                    }
+        
+                    // Populate the #age field with the calculated age
+                    $('#age').val(age).focus();
+                },
+                format: 'yyyy-mm-dd' // Specify the format as needed
+            });
+        
             $('#registration-form').on('submit', function (event) {
                 event.preventDefault();
-
-                // Collect the data from the form
+        
+                // Create a new FormData object
                 var formData = new FormData(this);
-                console.log('Form data:', formData);
-
-                // Send data to Google Apps Script endpoint
-                fetch('https://script.google.com/macros/s/AKfycbxBxZV7NTSn-MRycgPVDqKtY-Vaa-JmfMRR46PLy3QG3lhzlqKdUwdFa6fbgaclIB4O/exec', {
+        
+                // Get the image file input
+                var imageFile = document.getElementById('image').files[0];
+        
+                if (imageFile) {
+                    // Convert image file to Base64
+                    toBase64(imageFile).then(base64String => {
+                        // Append the base64-encoded image to formData
+                        formData.append('image', base64String);
+        
+                        // Send data to Google Apps Script endpoint
+                        sendFormData(formData);
+                    });
+                } else {
+                    // No image, send formData as it is
+                    sendFormData(formData);
+                }
+            });
+        
+            function sendFormData(formData) {
+                fetch('https://script.google.com/macros/s/AKfycbwkasWR6DiU830KlVssmVseys2eafwzRarYeC7hwlUbEHP6DvA-_OBhFFCtlFd6ExlJ/exec', {
                     method: 'POST',
                     body: formData
                 })
                 .then(response => response.json())
                 .then(data => console.log('Data sent successfully!'))
                 .catch(error => console.log('Error:', error));
-            });
+            }
+        
+            function toBase64(file) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = () => resolve(reader.result.split(',')[1]); // Extract only the Base64 string
+                    reader.onerror = error => reject(error);
+                });
+            }
         });
+        
     </script>
 </body>
 </html>
