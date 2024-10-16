@@ -1,207 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>Patient Details</title>
-    <meta charset="utf-8" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>
-        /* Styling as before */
-        form {
-            margin: 50px auto;
-            width: 600px;
-            max-width: 100%;
-            padding: 20px;
-            border-radius: 40px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-        legend {
-            font-size: 16px;
-            font-weight: 500;
-            padding: 0 5px;
-            margin: 0 10px;
-        }
-        fieldset {
-            border: 1px solid #c0c0c0;
-            padding: 10px;
-            margin: 10px;
-            border-radius: 20px;
-        }
-        h1 {
-            margin-top: 20px;
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 40px;
-            font-weight: 600;
-        }
 
-        input[type="checkbox"] {
-            opacity: 1 !important;
-            pointer-events: unset !important;
-            position: static !important;
-        }
+    <head>
+        <title>Patient Details</title>
+        <meta charset="utf-8" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+            /* Styling as before */
+            form {
+                margin: 50px auto;
+                width: 600px;
+                max-width: 100%;
+                padding: 20px;
+                border-radius: 40px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            }
 
-        .check-label{
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-    </style>
-</head>
+            legend {
+                font-size: 16px;
+                font-weight: 500;
+                padding: 0 5px;
+                margin: 0 10px;
+            }
 
-<body>
-    <form id="registration-form" enctype="multipart/form-data">
-        <h1>Patient Registration Form</h1>
-        <fieldset>
-            <legend>Personal Details</legend>
-            <div class="row">
-                <div class="col s12">
-                    <label for="image">Upload Image</label>
-                    <input id="image" name="image" type="file" class="validate" accept="image/png, image/jpg, image/jpeg">
-                </div>
-                <div class="input-field col s6">
-                    <input id="first_name" name="first_name" type="text" class="validate" required>
-                    <label for="first_name">First Name</label>
-                </div>
-                <div class="input-field col s6">
-                    <input id="last_name" name="last_name" type="text" class="validate" required>
-                    <label for="last_name">Last Name</label>
-                </div>
-                <div class="input-field col s6">
-                    <input id="birth-date" name="birth_date" type="text" class="datepicker" required>
-                    <label for="birth-date">Birth-date</label>
-                </div>
-                <div class="input-field col s6">
-                    <input id="age" name="age" type="text" class="validate" required>
-                    <label for="age">Age</label>
-                </div>
-                <div class="input-field col s6">
-                    <select name="sex" required>
-                        <option value="" disabled selected>Choose your option</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
-                    <label>Sex</label>
-                </div>
-                <div class="input-field col s6">
-                    <select name="civil_status" required>
-                        <option value="" disabled selected>Choose your option</option>
-                        <option value="Single">Single</option>
-                        <option value="Married">Married</option>
-                        <option value="Divorced">Divorced</option>
-                        <option value="Widowed">Widowed</option>
-                    </select>
-                    <label>Civil Status</label>
-                </div>
-                <div class="input-field col s6">
-                    <input id="phone-number" name="phone_number" type="text" class="validate" required>
-                    <label for="phone-number">Phone</label>
-                </div>
-                <div class="input-field col s6">
-                    <input id="occupation" name="occupation" type="text" class="validate" required>
-                    <label for="occupation">Occupation</label>
-                </div>
-                <div class="input-field col s12">
-                    <input id="email" name="email" type="email" class="validate" required>
-                    <label for="email">Email</label>
-                </div>
-                <div class="input-field col s12">
-                    <input id="address" name="address" type="text" class="validate" required>
-                    <label for="address">Address</label>
-                </div>
+            fieldset {
+                border: 1px solid #c0c0c0;
+                padding: 10px;
+                margin: 10px;
+                border-radius: 20px;
+            }
+
+            h1 {
+                margin-top: 20px;
+                text-align: center;
+                margin-bottom: 20px;
+                font-size: 40px;
+                font-weight: 600;
+            }
+
+            input[type="checkbox"] {
+                opacity: 1 !important;
+                pointer-events: unset !important;
+                position: static !important;
+            }
+
+            .check-label {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .logo-img {
+                height: 80px;
+                max-width: 100%;
+                margin-top: 20px;
+            }
+
+            @media (max-width: 600px) {
+                form {
+                    box-shadow: none;
+                    margin: 20px auto !important;
+                    padding: 10px !important;
+                }
+
+                h1 {
+                    font-size: 30px;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <form id="registration-form" enctype="multipart/form-data">
+            <div class="center">
+                <img src="https://t4.ftcdn.net/jpg/06/96/89/13/360_F_696891328_utj80ZwXsdy8SloC9IBaFGDIcGNBrEze.jpg"
+                    alt="Logo" class="logo-img">
             </div>
-        </fieldset>
-        <fieldset>
-            <legend>Symptoms</legend>
-            <div>
-                <p>Are you experiencing any symptoms?</p>
-                <label><input name="symptoms" type="radio" value="No" checked /><span>No</span></label>
-                <label><input name="symptoms" type="radio" value="Yes" /><span>Yes</span></label>
+            <h1>Patient Registration Form</h1>
+            <fieldset>
+                <legend>Personal Details</legend>
+                <div class="row">
+                    <div class="input-field col m6 s12">
+                        <input id="first_name" name="first_name" type="text" class="validate" required>
+                        <label for="first_name">First Name</label>
+                    </div>
+                    <div class="input-field col m6 s12">
+                        <input id="last_name" name="last_name" type="text" class="validate" required>
+                        <label for="last_name">Last Name</label>
+                    </div>
+                    <div class="input-field col m6 s12">
+                        <input id="birth-date" name="birth_date" type="text" class="datepicker" required>
+                        <label for="birth-date">Birth-date</label>
+                    </div>
+                    <div class="input-field col m6 s12">
+                        <input id="age" name="age" type="text" class="validate" required>
+                        <label for="age">Age</label>
+                    </div>
+                    <div class="input-field col m6 s12">
+                        <select name="sex" required>
+                            <option value="" disabled selected>Choose your option</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                        <label>Sex</label>
+                    </div>
+                    <div class="input-field col m6 s12">
+                        <select name="civil_status" required>
+                            <option value="" disabled selected>Choose your option</option>
+                            <option value="Single">Single</option>
+                            <option value="Married">Married</option>
+                            <option value="Divorced">Divorced</option>
+                            <option value="Widowed">Widowed</option>
+                        </select>
+                        <label>Civil Status</label>
+                    </div>
+                    <div class="input-field col m6 s12">
+                        <input id="phone-number" name="phone_number" type="text" class="validate" maxlength="11"
+                            required>
+                        <label for="phone-number">Phone</label>
+                    </div>
+                    <div class="input-field col m6 s12">
+                        <input id="occupation" name="occupation" type="text" class="validate" required>
+                        <label for="occupation">Occupation</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="email" name="email" type="email" class="validate" required>
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="address" name="address" type="text" class="validate" required>
+                        <label for="address">Address</label>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Symptoms</legend>
+                <div>
+                    <p>Are you experiencing any symptoms?</p>
+                    <label><input name="symptoms" type="radio" value="No" checked /><span>No</span></label>
+                    <label><input name="symptoms" type="radio" value="Yes" /><span>Yes</span></label>
+                </div>
+                <div>
+                    <p>Are you pregnant or breastfeeding?</p>
+                    <label><input name="pregnancy" type="radio" value="No" checked /><span>No</span></label>
+                    <label><input name="pregnancy" type="radio" value="Yes" /><span>Yes</span></label>
+                </div>
+                <div>
+                    <p>Do you have any allergies?</p>
+                    <label><input name="allergies" type="radio" value="No" checked /><span>No</span></label>
+                    <label><input name="allergies" type="radio" value="Yes" /><span>Yes</span></label>
+                </div>
+                <div>
+                    <p>Do you have any blood-borne infections?</p>
+                    <label><input name="bb_infection" type="radio" value="No" checked /><span>No</span></label>
+                    <label><input name="bb_infection" type="radio" value="Yes" /><span>Yes</span></label>
+                </div>
+            </fieldset>
+            <fieldset>
+                <label class="check-label"><input name="checkbox" type="checkbox" required /> I hereby certify that the
+                    information provided above is true, correct, and complete.</label>
+            </fieldset>
+            <div id="response"></div>
+            <div class="center">
+                <button class="waves-effect waves-light btn-large" type="submit"><i
+                        class="material-icons right">send</i>Submit</button>
             </div>
-            <div>
-                <p>Are you pregnant or breastfeeding?</p>
-                <label><input name="pregnancy" type="radio" value="No" checked /><span>No</span></label>
-                <label><input name="pregnancy" type="radio" value="Yes" /><span>Yes</span></label>
-            </div>
-            <div>
-                <p>Do you have any allergies?</p>
-                <label><input name="allergies" type="radio" value="No" checked /><span>No</span></label>
-                <label><input name="allergies" type="radio" value="Yes" /><span>Yes</span></label>
-            </div>
-            <div>
-                <p>Do you have any blood-borne infections?</p>
-                <label><input name="bb_infection" type="radio" value="No" checked /><span>No</span></label>
-                <label><input name="bb_infection" type="radio" value="Yes" /><span>Yes</span></label>
-            </div>
-        </fieldset>
-        <fieldset>
-            <label class="check-label"><input name="checkbox" type="checkbox" required /> I hereby certify that the information provided above is true, correct, and complete.</label>
-        </fieldset>
-        <div id="response"></div>
-        <div class="center">
-            <button class="waves-effect waves-light btn-large" type="submit"><i class="material-icons right">send</i>Submit</button>
-        </div>
-    </form>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('select').formSelect();
-            $('.datepicker').datepicker({
-                onSelect: function(selectedDate) {
-                    $('#age');
-                    // Calculate the age based on selected date
-                    var birthDate = new Date(selectedDate);
-                    var today = new Date();
-                    var age = today.getFullYear() - birthDate.getFullYear();
-                    var month = today.getMonth() - birthDate.getMonth();
-        
-                    // Adjust age if the birthday hasn't occurred yet this year
-                    if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
-                        age--;
-                    }
-        
-                    // Populate the #age field with the calculated age
-                    $('#age').val(age).focus();
-                },
-                format: 'yyyy-mm-dd' // Specify the format as needed
-            });
-        
-            $('#registration-form').on('submit', function (event) {
-                event.preventDefault();
-        
-                // Create a new FormData object
-                var formData = new FormData(this);
-        
-                // Get the image file input
-                var imageFile = document.getElementById('image').files[0];
-        
-                if (imageFile) {
-                    // Convert image file to Base64
-                    toBase64(imageFile).then(base64String => {
-                        // Append the base64-encoded image to formData
-                        formData.append('image', base64String);
-        
-                        // Send data to Google Apps Script endpoint
-                        sendFormData(formData);
-                    });
-                } else {
+        </form>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('select').formSelect();
+                $('.datepicker').datepicker({
+                    onSelect: function (selectedDate) {
+                        $('#age');
+                        // Calculate the age based on selected date
+                        var birthDate = new Date(selectedDate);
+                        var today = new Date();
+                        var age = today.getFullYear() - birthDate.getFullYear();
+                        var month = today.getMonth() - birthDate.getMonth();
+
+                        // Adjust age if the birthday hasn't occurred yet this year
+                        if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+                            age--;
+                        }
+
+                        // Populate the #age field with the calculated age
+                        $('#age').val(age).focus();
+                    },
+                    format: 'yyyy-mm-dd' // Specify the format as needed
+                });
+
+                $('#registration-form').on('submit', function (event) {
+                    event.preventDefault();
+
+                    // Create a new FormData object
+                    var formData = new FormData(this);
+
                     // No image, send formData as it is
                     sendFormData(formData);
-                }
-            });
-        
-            function sendFormData(formData) {
-                fetch('https://script.google.com/macros/s/AKfycbwkasWR6DiU830KlVssmVseys2eafwzRarYeC7hwlUbEHP6DvA-_OBhFFCtlFd6ExlJ/exec', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    // Show success alert and reset form
-                    if (data.result === 'success') {
-                        $('#response').html(`
+                });
+
+                function sendFormData(formData) {
+                    fetch('https://script.google.com/macros/s/AKfycbzQKccDh9_lnqPAaoPjVI2TkF1ArwTb3Gb98w9A4zHSwZyfjPN-_7dhTvLVOj_5uSg/exec', {
+                        method: 'POST',
+                        body: formData
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            // Show success alert and reset form
+                            if (data.result === 'success') {
+                                $('#response').html(`
                             <div class="card green lighten-4">
                                 <div class="card-content green-text">
                                     <span class="card-title"><i class="material-icons left">check_circle</i>Success!</span>
@@ -209,11 +220,11 @@
                                 </div>
                             </div>
                         `);
-                        $('#registration-form')[0].reset(); // Reset the form
-                        $('select').formSelect(); // Re-initialize Materialize select
-                    } else {
-                        // Show danger alert if data.result is not 'success'
-                        $('#response').html(`
+                                $('#registration-form')[0].reset(); // Reset the form
+                                $('select').formSelect(); // Re-initialize Materialize select
+                            } else {
+                                // Show danger alert if data.result is not 'success'
+                                $('#response').html(`
                             <div class="card red lighten-4">
                                 <div class="card-content red-text">
                                     <span class="card-title"><i class="material-icons left">error</i>Error!</span>
@@ -221,11 +232,11 @@
                                 </div>
                             </div>
                         `);
-                    }
-                })
-                .catch(error => {
-                    // Show danger alert for network errors or other fetch errors
-                    $('#response').html(`
+                            }
+                        })
+                        .catch(error => {
+                            // Show danger alert for network errors or other fetch errors
+                            $('#response').html(`
                         <div class="card red lighten-4">
                             <div class="card-content red-text">
                                 <span class="card-title"><i class="material-icons left">error</i>Error!</span>
@@ -233,21 +244,13 @@
                             </div>
                         </div>
                     `);
-                    console.log('Error:', error);
-                });
-            }
-            
-        
-            function toBase64(file) {
-                return new Promise((resolve, reject) => {
-                    const reader = new FileReader();
-                    reader.readAsDataURL(file);
-                    reader.onload = () => resolve(reader.result.split(',')[1]); // Extract only the Base64 string
-                    reader.onerror = error => reject(error);
-                });
-            }
-        });
-        
-    </script>
-</body>
+                            console.log('Error:', error);
+                        });
+                }
+                
+            });
+
+        </script>
+    </body>
+
 </html>
